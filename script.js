@@ -3,11 +3,11 @@ console.log(randomInteger);
 
 function getComputerChoice (randomInteger) {
     if (randomInteger === 1) {
-        return "Rock";
+        return "rock";
     } else if (randomInteger === 2) {
-        return "Paper";
+        return "paper";
     } else {
-        return "Scissors";
+        return "scissors";
     }
 }
 
@@ -26,18 +26,20 @@ const playerChoice = selectionCase(playerSelection);
 console.log(selectionCase(playerSelection));
 
 function round (playerChoice, computerChoice) {
-    if (playerChoice === "rock" && computerChoice === "Scissors") {
+    if (playerChoice === "rock" && computerChoice === "scissors") {
         return "You win! Rock beats scissors!";
-    } else if (playerChoice === "scissors" && computerChoice === "Rock") {
+    } else if (playerChoice === "scissors" && computerChoice === "rock") {
         return "You lose! Rock beats scissors!";
-    } else if (playerChoice === "scissors" && computerChoice === "Paper") {
+    } else if (playerChoice === "scissors" && computerChoice === "paper") {
         return "You win! Scissors beats paper!";
-    } else if (playerChoice === "paper" && computerChoice === "Scissors") {
+    } else if (playerChoice === "paper" && computerChoice === "scissors") {
         return "You lose! Scissors beats paper!";
-    } else if (playerChoice === "paper" && computerChoice === "Rock") {
+    } else if (playerChoice === "paper" && computerChoice === "rock") {
         return "You win! Paper beats rock!";
-    } else if (playerChoice === "rock" && computerChoice === "Paper") {
+    } else if (playerChoice === "rock" && computerChoice === "paper") {
         return "You lose! Paper beats rock!";
+    } else if (playerChoice === computerChoice) {
+        return "It's a draw!!!"
     }
 }
 

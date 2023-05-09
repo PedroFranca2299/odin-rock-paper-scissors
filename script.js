@@ -1,46 +1,81 @@
-const randomInteger = Math.floor(Math.random() * 3) + 1;
-console.log(randomInteger);
+//REFACTOR
 
-function getComputerChoice (randomInteger) {
-    if (randomInteger === 1) {
-        return "rock";
-    } else if (randomInteger === 2) {
-        return "paper";
+const choices = ["rock", "paper", "scissors"]
+const winners = [];
+
+//Play the game, 5 rounds, console based
+function game() {
+    for (let i = 1; i <= 5; i++) {
+        playRound(i);
+    }
+    logWins();
+}
+
+function playRound(round) {
+    const playerSelection = playerChoice();
+    const computerSelection = computerChoice();
+    const winner = checkWinner(playerSelection, computerSelection);
+    winners.push(winner);
+    logRound(playerSelection, computerSelection, winner, round)
+}
+
+//get input from player
+function playerChoice () {
+    let input = prompt('Type Rock, Paper or Scissors');
+    while(input == null) {
+        input = prompt('Type Rock, Paper or Scissors');
+    }
+    input = input.toLowerCase();
+    let check = validateInput(input);
+    while (check == false) {
+        input = prompt('Type Rock, Paper or Scissors. Spelling needs to be exact, but capitalization doesnt matter');
+        while(input == null) {
+            input = prompt('Type Rock, Paper or Scissors');
+        }
+        input = input.toLowerCase()
+        check = validateInput(input);
+    }
+    return input;
+}
+
+//get random input for computer
+function computerChoice () {
+    return choices[Math.floor(Math.random() * choices.length)];
+}
+
+function validateInput (choice) {
+    return choices.includes(choice)
+}
+
+function checkWinner (choiceP, choiceC) {
+    if (choiceP === choiceC) {
+        return "Tie";
+    } else if (
+        (choiceP === "rock" && choiceC === "scissors") || 
+        (choiceP === "scissors" && choiceC === "paper") || 
+        (choiceP === "paper" && choiceC === "rock")
+    ){
+        return "Player";
     } else {
-        return "scissors";
-    }
+        return "Computer";  
+    } 
 }
 
-const computerChoice = getComputerChoice(randomInteger); 
-
-console.log(computerChoice);
-
-const playerSelection = prompt("Choose rock, paper or scissors!");
-
-function selectionCase (playerSelection) {
-    return playerSelection.toLowerCase();
+function logWins () {
+    let playerWins = winners.filter((item) => item == "Player").length;
+    let computerWins = winners.filter((item) => item == "Computer").length;
+    let ties = winners.filter((item) => item == "Tie").length;
+    console.log("Results:")
+    console.log("Player wins:", playerWins);
+    console.log("Computer wins:", computerWins);
+    console.log("Ties:", ties);
 }
 
-const playerChoice = selectionCase(playerSelection);
-
-console.log(selectionCase(playerSelection));
-
-function round (playerChoice, computerChoice) {
-    if (playerChoice === "rock" && computerChoice === "scissors") {
-        return "You win! Rock beats scissors!";
-    } else if (playerChoice === "scissors" && computerChoice === "rock") {
-        return "You lose! Rock beats scissors!";
-    } else if (playerChoice === "scissors" && computerChoice === "paper") {
-        return "You win! Scissors beats paper!";
-    } else if (playerChoice === "paper" && computerChoice === "scissors") {
-        return "You lose! Scissors beats paper!";
-    } else if (playerChoice === "paper" && computerChoice === "rock") {
-        return "You win! Paper beats rock!";
-    } else if (playerChoice === "rock" && computerChoice === "paper") {
-        return "You lose! Paper beats rock!";
-    } else if (playerChoice === computerChoice) {
-        return "It's a draw!!!"
-    }
+function logRound (playerChoice, computerChoice, winner, round) {
+    console.log("Round:", round)
+    console.log("Player Chose:", playerChoice);
+    console.log("Computer Chose:", computerChoice);
+    console.log(winner, "Won the round");
+    console.log("-------------------------------");
 }
-
-console.log(round(playerChoice, computerChoice));
+game();

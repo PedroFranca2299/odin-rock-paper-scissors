@@ -86,15 +86,15 @@ function checkWinner (choiceP, choiceC) {
     } 
 }
 
-const playerChoicePara = document.getElementById('player-choice');
-const computerChoicePara = document.getElementById('computer-choice');
-const roundWinnerPara = document.getElementById('winner');
-const currentRoundPara = document.getElementById('round');
+let currentRoundPara = document.getElementById('round');
+let playerChoicePara = document.getElementById('player-choice');
+let computerChoicePara = document.getElementById('computer-choice');
+let roundWinnerPara = document.getElementById('winner');
 
-const resultsPara = document.getElementById('results');
-const playerWinsPara = document.getElementById('player-wins');
-const computerWinsPara = document.getElementById('computer-wins');
-const tiesPara = document.getElementById('ties');
+let resultsPara = document.getElementById('results');
+let playerWinsPara = document.getElementById('player-wins');
+let computerWinsPara = document.getElementById('computer-wins');
+let tiesPara = document.getElementById('ties');
 
 function logWins () {
     let playerWins = winners.filter((item) => item == "Player").length;

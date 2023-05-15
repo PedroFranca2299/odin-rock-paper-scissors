@@ -108,9 +108,9 @@ function logWins () {
 
 function logRound (playerChoice, computerChoice, winner, round) {
     currentRoundPara.textContent = "Round:" + round;
-    playerChoicePara.textContent = "Player Chose:" + playerChoice;
-    computerChoicePara.textContent = "Computer Chose:" + computerChoice;
-    roundWinnerPara.textContent = winner + "Won the round";
+    playerChoicePara.textContent = "Player Chose: " + playerChoice;
+    computerChoicePara.textContent = "Computer Chose: " + computerChoice;
+    roundWinnerPara.textContent = winner + " Won the round";
     // .textContent = "-------------------------------");
 }
 

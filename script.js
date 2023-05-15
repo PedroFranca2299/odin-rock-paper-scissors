@@ -3,40 +3,65 @@
 const choices = ["rock", "paper", "scissors"]
 const winners = [];
 
-//Play the game, 5 rounds, console based
-function game() {
-    for (let i = 1; i <= 5; i++) {
-        playRound(i);
-    }
-    logWins();
-}
+let round = 1;
+const maxRounds = 5;
 
-function playRound(round) {
-    const playerSelection = playerChoice();
+const rockButton = document.getElementById('rock');
+rockButton.addEventListener('click', () => { 
+    choice = playRound('rock');
+});
+
+const paperButton = document.getElementById('paper');
+paperButton.addEventListener('click', () => { 
+    choice = playRound('paper');
+});
+
+const scissorsButton = document.getElementById('scissors');
+scissorsButton.addEventListener('click', () => { 
+    choice = playRound('scissors');
+});
+
+// Play the game, 5 rounds, console based
+// function game() {
+//     for (let i = 1; i <= 5; i++) {
+//         playRound(i);
+//     }
+//     logWins();
+// }
+
+function playRound(playerSelection) {
     const computerSelection = computerChoice();
     const winner = checkWinner(playerSelection, computerSelection);
     winners.push(winner);
     logRound(playerSelection, computerSelection, winner, round)
+    if (round === maxRounds) {
+        logWins();
+    } else {
+        round++
+    }
+
+    console.log(round);
 }
 
 //get input from player
-function playerChoice () {
-    let input = prompt('Type Rock, Paper or Scissors');
-    while(input == null) {
-        input = prompt('Type Rock, Paper or Scissors');
-    }
-    input = input.toLowerCase();
-    let check = validateInput(input);
-    while (check == false) {
-        input = prompt('Type Rock, Paper or Scissors. Spelling needs to be exact, but capitalization doesnt matter');
-        while(input == null) {
-            input = prompt('Type Rock, Paper or Scissors');
-        }
-        input = input.toLowerCase()
-        check = validateInput(input);
-    }
-    return input;
-}
+// function playerChoice (choice) {
+//     console.log(choice);
+//     let input = 
+//     while(input == null) {
+//         input = prompt('Type Rock, Paper or Scissors');
+//     }
+//     input = input.toLowerCase();
+//     let check = validateInput(input);
+//     while (check == false) {
+//         input = prompt('Type Rock, Paper or Scissors. Spelling needs to be exact, but capitalization doesnt matter');
+//         while(input == null) {
+//             input = prompt('Type Rock, Paper or Scissors');
+//         }
+//         input = input.toLowerCase()
+//         check = validateInput(input);
+//     }
+//     return input;
+// }
 
 //get random input for computer
 function computerChoice () {
@@ -61,21 +86,36 @@ function checkWinner (choiceP, choiceC) {
     } 
 }
 
+const playerChoicePara = document.getElementById('player-choice');
+const computerChoicePara = document.getElementById('computer-choice');
+const roundWinnerPara = document.getElementById('winner');
+const currentRoundPara = document.getElementById('round');
+
+const resultsPara = document.getElementById('results');
+const playerWinsPara = document.getElementById('player-wins');
+const computerWinsPara = document.getElementById('computer-wins');
+const tiesPara = document.getElementById('ties');
+
 function logWins () {
     let playerWins = winners.filter((item) => item == "Player").length;
     let computerWins = winners.filter((item) => item == "Computer").length;
     let ties = winners.filter((item) => item == "Tie").length;
-    console.log("Results:")
-    console.log("Player wins:", playerWins);
-    console.log("Computer wins:", computerWins);
-    console.log("Ties:", ties);
+    resultsPara.textContent = "Results:"
+    playerWinsPara.textContent = "Player wins:" + playerWins;
+    computerWinsPara.textContent = "Computer wins:" + computerWins;
+    tiesPara.textContent = "Ties:" + ties;
 }
 
 function logRound (playerChoice, computerChoice, winner, round) {
-    console.log("Round:", round)
-    console.log("Player Chose:", playerChoice);
-    console.log("Computer Chose:", computerChoice);
-    console.log(winner, "Won the round");
-    console.log("-------------------------------");
+    currentRoundPara.textContent = "Round:" + round;
+    playerChoicePara.textContent = "Player Chose:" + playerChoice;
+    computerChoicePara.textContent = "Computer Chose:" + computerChoice;
+    roundWinnerPara.textContent = winner + "Won the round";
+    // .textContent = "-------------------------------");
 }
-game();
+
+
+
+
+
+// game();
